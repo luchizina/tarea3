@@ -58,7 +58,7 @@ and open the template in the editor.
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Consultar propuesta</a></li>
+                <li class="active"><a href="<%= request.getContextPath() %>/Propuestas">Consultar propuesta</a></li>
               <li><a href="#">Registrar colaboración</a></li>
              <li><a href="#">Pagar colaboración</a></li>
              
