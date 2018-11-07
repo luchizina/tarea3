@@ -5,6 +5,7 @@
  */
 package Servlets;
 
+import config.Utils;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import static java.lang.System.out;
+import java.net.URL;
+import java.util.Properties;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -22,8 +25,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "inicSesion", urlPatterns = {"/iniciarS"})
 public class inicSesion extends HttpServlet {
 //    private final IUsuario usuario = fabrica.getICtrlUsuario();
-       servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
-        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
+      
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,7 +39,18 @@ public class inicSesion extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
  PrintWriter out = response.getWriter();
-        this.port.cargarUsuarios2();
+ Properties p = Utils.getPropiedades(request);
+String http=p.getProperty("http");
+String ip=p.getProperty("ipServices");
+String puerto =p.getProperty("puertoServ");
+String servicio1=p.getProperty("serv1");
+
+
+        URL hola = new URL(http+ip+puerto+servicio1);
+        servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
+        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
+       
+  
         
       HttpSession respuesta = request.getSession(true);
      if(respuesta.getAttribute("sesionAct")==null){
@@ -47,7 +60,8 @@ public class inicSesion extends HttpServlet {
            
       String pass = request.getParameter("password");
      
-          servicios.DtInfo resultado= this.port.resolverLogin(nick, pass);
+          servicios.DtInfo resultado= port.resolverLogin(nick, pass);
+    
  if (resultado.getTipoUser().equalsIgnoreCase("colaborador")){
  if(resultado.isEstLogin()){
       respuesta.setAttribute("sesionAct", resultado.getNick());

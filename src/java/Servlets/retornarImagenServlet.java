@@ -5,12 +5,15 @@
  */
 package Servlets;
 
+import config.Utils;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URL;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -40,8 +43,15 @@ public class retornarImagenServlet extends HttpServlet {
             throws ServletException, IOException{
             String T = request.getParameter("T");
             response.setContentType("image/jpeg");
-             servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService();
-            servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
+            Properties p = Utils.getPropiedades(request);
+String http=p.getProperty("http");
+String ip=p.getProperty("ipServices");
+String puerto =p.getProperty("puertoServ");
+
+String servicio2=p.getProperty("serv2");
+        URL hola2 = new URL(http+ip+puerto+servicio2);
+        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService(hola2);
+        servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
             
             //BufferedImage bi = ip.retornarImagen_Propuesta(T);
             byte[] bi = port3.retornarImagenPropuesta(T);

@@ -1,6 +1,8 @@
 package Servlets;
 
+import config.Utils;
 import java.io.IOException;
+import java.net.URL;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import java.util.List;
+import java.util.Properties;
 import javax.servlet.http.HttpSession;
 @WebServlet(name = "pagar", urlPatterns = {"/pagar"})
 public class pagar extends HttpServlet {
@@ -22,17 +25,34 @@ public class pagar extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
-        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
-        servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService();
-        servicios.PublicadorCategoria port2 = servicioCategoria.getPublicadorCategoriaPort();
-        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService();
-        servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
+   
         
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
         response.setContentType("text/html;charset=UTF-8");
             request.setCharacterEncoding("UTF-8");
+            Properties p = Utils.getPropiedades(request);
+String http=p.getProperty("http");
+String ip=p.getProperty("ipServices");
+String puerto =p.getProperty("puertoServ");
+String servicio1=p.getProperty("serv1");
+String servicio2=p.getProperty("serv2");
+String servicio3=p.getProperty("serv3");
+
+        URL hola = new URL(http+ip+puerto+servicio1);
+        URL hola2 = new URL(http+ip+puerto+servicio2);
+        URL hola3 = new URL(http+ip+puerto+servicio3);
+        servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
+        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
+        servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService(hola3);
+        servicios.PublicadorCategoria port2 = servicioCategoria.getPublicadorCategoriaPort();
+        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService(hola2);
+        servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
+            
+            
+            
+            
+            
             // LISTAR PROPUESTAS 
             HttpSession respuesta = request.getSession(true);
          
