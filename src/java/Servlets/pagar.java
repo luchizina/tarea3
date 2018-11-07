@@ -9,8 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import java.util.List;
-@WebServlet(name = "Propuestas", urlPatterns = {"/Propuestas"})
-public class Propuestas extends HttpServlet {
+import javax.servlet.http.HttpSession;
+@WebServlet(name = "pagar", urlPatterns = {"/pagar"})
+public class pagar extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,27 +34,14 @@ public class Propuestas extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
             request.setCharacterEncoding("UTF-8");
             // LISTAR PROPUESTAS 
+            HttpSession respuesta = request.getSession(true);
+         
             if (request.getParameter("T") == null) {
+            servicios.DtUsuario user=inicSesion.getUsuarioLogueado(request);
+                List<servicios.DtColaboracion> x = port.traerPropuestasColaboradas(user.getNick()).getListita();
+                request.setAttribute("col", x);
+                this.getServletContext().getRequestDispatcher("/vistas/pro_pagar.jsp").forward(request, response);
             
-                List<servicios.DtPropuesta> x = port3.listarPropuestasWeb().getListita();
-                request.setAttribute("propuestas", x);
-                this.getServletContext().getRequestDispatcher("/vistas/pros.jsp").forward(request, response);
-            } else {
-            // CONSULTA A UNA PROPUESTA 
-                String t = request.getParameter("T");
-                String titulo = t.replace("+"," ");
-                //boolean existe = IP.existeTitulo(titulo);
-                boolean existe = port3.existePropuesta(titulo);
-                if(existe){
-                //DtPropuesta p_consulta = IP.SeleccionarProp(titulo);
-                servicios.DtPropuesta p_consulta = port3.selccionarPropuesta(titulo);
-                List<String> colaborador = port3.colaboradoresDePropuesta().getListita();
-                request.setAttribute("propu", p_consulta);
-                request.setAttribute("col", colaborador);           
-                this.getServletContext().getRequestDispatcher("/vistas/prop_info.jsp").forward(request, response);
-          
-                }
-               
     }
     }
 

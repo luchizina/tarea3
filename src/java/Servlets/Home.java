@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -55,7 +56,13 @@ servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorU
 //                IP.cargarColaboraciones();
 //                IP.actualizarMontos();
 //                IP.EstadosPropuestas();
+ HttpSession respuesta = request.getSession(true);
+     if(respuesta.getAttribute("sesionAct")==null){
         request.getRequestDispatcher("/vistas/IniciarS.jsp").forward(request, response);
+     }
+     else {
+         request.getRequestDispatcher("/vistas/menu.jsp").forward(request, response);
+     }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -41,7 +41,6 @@ public class inicSesion extends HttpServlet {
         
       HttpSession respuesta = request.getSession(true);
      if(respuesta.getAttribute("sesionAct")==null){
-         
     
       String nick = request.getParameter("nick");
       if(nick!=null){
@@ -49,7 +48,7 @@ public class inicSesion extends HttpServlet {
       String pass = request.getParameter("password");
      
           servicios.DtInfo resultado= this.port.resolverLogin(nick, pass);
-          
+ if (resultado.getTipoUser().equalsIgnoreCase("colaborador")){
  if(resultado.isEstLogin()){
       respuesta.setAttribute("sesionAct", resultado.getNick());
       respuesta.setAttribute("tipo", resultado.getTipoUser());
@@ -62,6 +61,10 @@ public class inicSesion extends HttpServlet {
      this.getServletContext().getRequestDispatcher("/vistas/IniciarS.jsp").forward(request, response);
     
  }
+ }  else{
+            request.setAttribute("error","proponente");
+           this.getServletContext().getRequestDispatcher("/vistas/IniciarS.jsp").forward(request, response);
+      }
     }
       else{
            this.getServletContext().getRequestDispatcher("/vistas/IniciarS.jsp").forward(request, response);
@@ -70,6 +73,7 @@ public class inicSesion extends HttpServlet {
        }else{
         this.getServletContext().getRequestDispatcher("/vistas/menu.jsp").forward(request, response);  
      }
+     
       
     }
     

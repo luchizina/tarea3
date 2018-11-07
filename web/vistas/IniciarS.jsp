@@ -1,5 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@page import="Servlets.inicSesion"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+
+<%@page session="true" %>
+
+
+<html lang="en" >
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,25 +14,41 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css">
 <script src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script> 
-<link href="<%=request.getContextPath()%>/css/style.css" rel="stylesheet">
+<script src="<%=request.getContextPath()%>/js/limpiar.js"></script> 
 <link href="<%=request.getContextPath()%>/css/login.css" rel="stylesheet">
+
 </head>
 <body >
-    <div class="login-form" style="background-color: transparent">
+     <%
+ servicios.DtUsuario userop=inicSesion.getUsuarioLogueado(request);
+ String sesionAct=(String) session.getAttribute("sesionAct");
+ if(sesionAct!=null) { %>
+
+ <%  }else{ %>
+    <div class="login-form" >
     <form action="iniciarS" method="post">
         <div>
-        <h2 class="text-center">Iniciar SesiÛn</h2>       
+        <h2 class="text-center">Iniciar Sesi√≥n</h2>       
         </div> 
         <div class="form-group">
         	<input type="text" class="form-control" name="nick" placeholder="Nick o Email" required="required">
         </div>
 		<div class="form-group">
-            <input type="password" class="form-control" name="password" placeholder="ContraseÒa" required="required">
+            <input type="password" class="form-control" name="password" placeholder="Contrase√±a" required="required">
         </div>        
         <div class="form-group">
             <button type="submit" class="btn btn-primary btn-lg btn-block">Entrar</button>
+            <% String a = (String) request.getAttribute("error");
+                if (a != null){%>
+                <br>
+           
+            <div class="alert alert-danger" role="alert">
+  <a href="#" class="alert-link">Esto es inc√≥modo, parece que hubo un problema </a>
+</div>
+             <% } %>	
         </div>   
     </form>
 </div>
+         <% } %>	
 </body>
 </html>                              

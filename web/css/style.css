@@ -4,12 +4,108 @@
 /*basic reset*/
 * {margin: 0; padding: 0;}
 
-html{
-	height: auto;
-        min-height: 100%;
-	/*Image only BG fallback*/
-	
-	/*background = gradient + image pattern combo*/
-	background: 
-		linear-gradient(rgba(196, 102, 0, 0.6), rgba(155, 89, 182, 0.6));
+
+
+.btn-circle.btn-xl {
+    width: 70px;
+    height: 70px;
+    padding: 10px 16px;
+    border-radius: 35px;
+    font-size: 24px;
+    line-height: 1.33;
+}
+
+.btn-circle {
+    transition: 1s all;
+   text-decoration: none;
+    padding: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-family: helvetica;
+    font-weight: 300;
+    font-size: 10px;
+    font-style: italic;
+    color: #fff;
+    background-color: #000;
+    border-radius: 15px;
+    transform: translateX(-50%) !important;
+left: 50%;
+position: relative;
+margin-bottom: 50px;
+background: transparent;
+border: 3px double #111;
+text-transform: uppercase;
+}
+ .btn-circle:hover{
+    opacity: 0.6;
+    text-decoration: none;
+  }
+fieldset.scheduler-border {
+    border: 1px groove #ddd !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+    -webkit-box-shadow:  0px 0px 0px 0px #000;
+            box-shadow:  0px 0px 0px 0px #000;
+}
+
+
+legend.scheduler-border {
+    width:inherit; /* Or auto */
+    padding:0 10px; /* To give a bit of padding on the left and right */
+    border-bottom:none;
+    text-align: center !important;
+    color: #fff;
+}
+.text-on-pannel {
+     background-color: rgba(20,20,20,.9);
+    height: auto;
+    margin-left: 10px;
+    padding: 3px 5px;
+    position: absolute;
+    margin-top: -17px;
+    border: 3px double #111;
+    border-radius: 8px;
+}
+.img-thumbnail {
+    width: 100%;
+}
+.panel {
+  /* for text on pannel */
+  margin-top: 27px !important;
+}
+.panel-body {
+  padding: 0px !important;
+}
+.text-uppercase {
+    color: white;
+    text-shadow: 1px 1px 4px #111;
+}
+.propuestason img{
+  margin: 5px;
+  left:50%;
+  position: relative;
+  transform: translateX(-50%);
+}
+.img-rounded{
+  transition: .5s all;
+}
+.propuestason:hover .img-rounded{
+  box-shadow: 0px 0px 3px .8px #000,
+    0px 0px 5px 1.5px #ddd;
+  transform: translateX(-50%) rotate(45deg) ;
+}
+.propuestason h3{
+  background-color: #ddd ;
+  opacity: .5;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+}
+.propuestason:hover > h3{
+   transition: .5s all;
+  opacity: 1;
+  box-shadow: 0px 0px 3px .8px #000,
+    0px 0px 5px 1.5px #ddd;
+  transform: translate(-50%, -50%) rotate(45deg) ;
 }

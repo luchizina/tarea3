@@ -31,7 +31,7 @@ and open the template in the editor.
     <![endif]-->
   </head>
 
-  <body>
+  <body style="background-color:  #32383e">
 <header>
     <div class="container">
  <% 
@@ -45,7 +45,7 @@ and open the template in the editor.
 
                             %>
       <!-- Static navbar -->
-      <nav class="navbar navbar-default">
+      <nav class="navbar navbar-inverse">
         <div class="container-fluid">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -58,9 +58,9 @@ and open the template in the editor.
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="<%= request.getContextPath() %>/Propuestas">Consultar propuesta</a></li>
-              <li><a href="#">Registrar colaboración</a></li>
-             <li><a href="#">Pagar colaboración</a></li>
+                <li><a href="<%= request.getContextPath() %>/Propuestas">Consultar propuesta</a></li>
+              <li><a href="">Registrar colaboración</a></li>
+             <li><a href="<%= request.getContextPath() %>/pagar">Pagar colaboración</a></li>
              
      </ul>
             <ul class="nav navbar-nav navbar-right">
