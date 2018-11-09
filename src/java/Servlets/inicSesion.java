@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import static java.lang.System.out;
 import java.net.URL;
 import java.util.Properties;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -44,12 +45,9 @@ String http=p.getProperty("http");
 String ip=p.getProperty("ipServices");
 String puerto =p.getProperty("puertoServ");
 String servicio1=p.getProperty("serv1");
-
-
         URL hola = new URL(http+ip+puerto+servicio1);
         servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
-       
   
         
       HttpSession respuesta = request.getSession(true);
@@ -57,19 +55,27 @@ String servicio1=p.getProperty("serv1");
     
       String nick = request.getParameter("nick");
       if(nick!=null){
-           
+        
       String pass = request.getParameter("password");
      
-          servicios.DtInfo resultado= port.resolverLogin(nick, pass);
+      servicios.DtInfo resultado= port.resolverLogin(nick, pass);
     
  if (resultado.getTipoUser().equalsIgnoreCase("colaborador")){
  if(resultado.isEstLogin()){
+     String checkcita= request.getParameter("rec");
+       if(request.getParameter("rec")!=null){
+            Cookie miCookie = new Cookie("usuario",nick);
+    // hacemos que nuestra cookie tenga sentido durante un día
+    miCookie.setMaxAge(60*60*24);
+    response.addCookie(miCookie);
+          }
       respuesta.setAttribute("sesionAct", resultado.getNick());
       respuesta.setAttribute("tipo", resultado.getTipoUser());
       respuesta.setAttribute("mensaje", resultado.getMensaje());
       
        this.getServletContext().getRequestDispatcher("/vistas/menu.jsp").forward(request, response);
  }
+ 
  else if(!resultado.isEstLogin()){
      respuesta.setAttribute("error", resultado.getMensaje());
      this.getServletContext().getRequestDispatcher("/vistas/IniciarS.jsp").forward(request, response);
@@ -87,7 +93,6 @@ String servicio1=p.getProperty("serv1");
        }else{
         this.getServletContext().getRequestDispatcher("/vistas/menu.jsp").forward(request, response);  
      }
-     
       
     }
     

@@ -37,6 +37,7 @@
             <input type="password" class="form-control" name="password" placeholder="Contraseña" required="required">
         </div>        
         <div class="form-group">
+            <input type="checkbox" name="rec">Recordarme
             <button type="submit" class="btn btn-primary btn-lg btn-block">Entrar</button>
             <% String a = (String) request.getAttribute("error");
                 if (a != null){%>

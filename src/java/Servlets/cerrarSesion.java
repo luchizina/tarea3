@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,19 +37,27 @@ public class cerrarSesion extends HttpServlet {
    PrintWriter out = response.getWriter();
         HttpSession sesion = request.getSession(true);
         if(sesion.getAttribute("sesionAct")!=null){
-            
-        
-        //Cerrar sesion
-        sesion.setAttribute("sesionAct", null);
+         Cookie [] cookies = request.getCookies();
+         String identificador = null; 
+        for (Cookie cookieActual : cookies) {
+         identificador = cookieActual.getName();
+            if(identificador.equals("usuario"))
+            {
+                  cookieActual.setMaxAge(0);
+                  response.addCookie(cookieActual);
+                //Cerrar sesion
+      //  sesion.setAttribute("sesionAct", null);
         sesion.invalidate();
-        this.getServletContext().getRequestDispatcher("/home").forward(request,response);
-        }else{
-            this.getServletContext().getRequestDispatcher("/vistas/cerrSesErr.jsp").forward(request,response);
+        this.getServletContext().getRequestDispatcher("/vistas/IniciarS.jsp").forward(request,response);
+               break; 
+            }
+           
         }
-       
-        
+         sesion.invalidate();
+        this.getServletContext().getRequestDispatcher("/home").forward(request,response);
         //Redirecciono a index.jsp
         
+    }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

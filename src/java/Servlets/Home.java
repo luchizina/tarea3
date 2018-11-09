@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.Properties;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,21 +35,7 @@ public class Home extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //Fabrica fabrica = Fabrica.getInstance();
-        
-//        ICategoria icat =fabrica.getICtrlCategoria();
-//        IPropuesta IP=fabrica.getICtrlPropuesta();
-//        IUsuario iUsu=fabrica.getICtrlUsuario();
-      
-//                iUsu.cargarUsuarios2();
-//                icat.cargarCategorias();
-//                IP.cargarPropuestas();
-//                IP.Cargar_Favoritos_Memoria();
-////                IP.Cargar_Comentarios_Memoria();
-//                IP.cargarColaboraciones();
-//                IP.actualizarMontos();
-//                IP.EstadosPropuestas();
-
+  
 Properties p = Utils.getPropiedades(request);
 String http=p.getProperty("http");
 String ip=p.getProperty("ipServices");
@@ -68,11 +55,22 @@ String servicio3=p.getProperty("serv3");
         servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
 
  HttpSession respuesta = request.getSession(true);
-     if(respuesta.getAttribute("sesionAct")==null){
+        Cookie [] cookies = request.getCookies();
+         String identificador = null; 
+        for (Cookie cookieActual : cookies) {
+         identificador = cookieActual.getName();
+           
+            if(identificador.equals("usuario"))
+            {
+                respuesta.setAttribute("sesionAct",cookieActual.getValue() );
+                request.getRequestDispatcher("/vistas/menu.jsp").forward(request, response);
+               break; 
+            }
+           
+        }
+        
+     if(respuesta.getAttribute("sesionAct")==null && !(identificador.equals("usuario"))){
         request.getRequestDispatcher("/vistas/IniciarS.jsp").forward(request, response);
-     }
-     else {
-         request.getRequestDispatcher("/vistas/menu.jsp").forward(request, response);
      }
     }
 
