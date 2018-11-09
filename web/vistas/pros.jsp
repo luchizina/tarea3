@@ -21,13 +21,13 @@
                 for (servicios.DtPropuesta propa : a) {
                     String h = propa.getTitulo().replace(" ", "+");
         %>
-            <div class="col-4 col-sm-4 col-lg-3 propuestason">
+            <div class="col-4 col-sm-4 col-xs-6 col-lg-3 propuestason">
                 <% if (propa.getImg() != null && !propa.getImg().equals("")) {%>
-                <a href="Propuestas?T=<%=h%>" title="<%= propa.getTitulo()%>"><img class="img-rounded" src="/tarea3/retornarimagen?T=<%= propa.getTitulo() %>" width="200" height="200"></a>
+                <a href="Propuestas?T=<%=h%>" title="<%= propa.getTitulo()%>"><img class="img-rounded" src="/tarea3/retornarimagen?T=<%= propa.getTitulo() %>" width="150" height="150"></a>
                  <%   } else {%>     
-                <a href="Propuestas?T=<%=h%>" title="<%= propa.getTitulo()%>"><img class="img-rounded"  src="/tarea3/img/pro.jpeg"  width="200" height="200" ></a>
+                <a href="Propuestas?T=<%=h%>" title="<%= propa.getTitulo()%>"><img class="img-rounded"  src="/tarea3/img/pro.jpeg"  width="150" height="150" ></a>
                        <%    }%>
-                <h3><%= propa.getTitulo()%></h3>
+                <h4><%= propa.getTitulo()%></h4>
             
             </div><!--/span-->  
              <% }

@@ -55,18 +55,18 @@
                                 String propu2 = propu.replace("_", " ");%>
                         <li class="list-group-item">Estado actual: <%=  propu2%></li>
                           <%   
-              List<String> am = (List<String>) request.getAttribute("col");
+              List<servicios.DtColaboracion> am = (List<servicios.DtColaboracion>) request.getAttribute("col");
             String ca = "";
            
         if(am != null && am.size()>0){
             int we = 0;
-                for (String propa : am) {
+                for (servicios.DtColaboracion propa : am) {
                    if(we!=0) ca+=", "; 
-                   ca += propa;
+                   ca += propa.getPropuesta().getTitulo();
                    we+=1;
                    
                 }
-        }
+        
         %>
                         <li class="list-group-item">Colaboradores: <%=ca %></li>
                     </ul>

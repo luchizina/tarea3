@@ -35,14 +35,13 @@
                    ca = propa.getPropuesta().getTitulo().replace(" ", "+");
                 
         %>
-  
-       <div class="row" >
+            <div class="row content" >
                 <div class="col-sm-4 col-md-4 col-lg-6 col-xl-6 col-sm-offset-4 col-md-offset-4 col-lg-offset-3 col-xl-offset-3">
 
                     <ul class="list-group">
                         <li class="list-group-item">Titulo: <a href="pagar?=<%= ca %>" ><%= propa.getPropuesta().getTitulo() %> </a></li>
                         <li class="list-group-item">Fecha de colaboración:    <%=new SimpleDateFormat("dd/MM/yyyy").format(propa.getFecha().toGregorianCalendar().getTime())%>></li>
-                         <li class="list-group-item">Monto colaborado: <%= propa.getMonto() %> ></li>
+                      
                     </ul>
                 </div><!-- /.col-sm-4 -->
             </div>
@@ -56,7 +55,7 @@
  %>
     <!-- Bootstrap core JavaScript -->
     <script src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
-        <script  src="<%= request.getContextPath()%>/js/limpiar.js"></script>
+
     <script src="<%=request.getContextPath()%>/js/bootstrap.bundle.min.js"></script>
 
   </body>

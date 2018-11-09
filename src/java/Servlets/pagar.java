@@ -49,10 +49,6 @@ String servicio3=p.getProperty("serv3");
         servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService(hola2);
         servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
             
-            
-            
-            
-            
             // LISTAR PROPUESTAS 
             HttpSession respuesta = request.getSession(true);
          
@@ -62,7 +58,9 @@ String servicio3=p.getProperty("serv3");
                 request.setAttribute("col", x);
                 this.getServletContext().getRequestDispatcher("/vistas/pro_pagar.jsp").forward(request, response);
             
-    }
+    } else{
+             this.getServletContext().getRequestDispatcher("/vistas/pro_pag_prop.jsp").forward(request, response);
+            }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
