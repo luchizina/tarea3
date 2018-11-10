@@ -56,7 +56,9 @@ String servicio3=p.getProperty("serv3");
 
  HttpSession respuesta = request.getSession(true);
         Cookie [] cookies = request.getCookies();
-         String identificador = null; 
+         String identificador = ""; 
+         if(cookies!=null){
+        
         for (Cookie cookieActual : cookies) {
          identificador = cookieActual.getName();
            
@@ -68,7 +70,7 @@ String servicio3=p.getProperty("serv3");
             }
            
         }
-        
+         }
      if(respuesta.getAttribute("sesionAct")==null && !(identificador.equals("usuario"))){
         request.getRequestDispatcher("/vistas/IniciarS.jsp").forward(request, response);
      }
