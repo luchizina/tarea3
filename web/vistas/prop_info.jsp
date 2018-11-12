@@ -69,6 +69,7 @@
         }
         
         
+        
         %>
                         <li class="list-group-item">Colaboradores: <%=ca %></li>
                    
