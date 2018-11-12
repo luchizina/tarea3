@@ -67,6 +67,8 @@ and open the template in the editor.
       </nav>
     </div> <!-- /container -->
 </header>
+           <img class="img-thumbnail " src="/img/logo.png" width="200" height="200">
+               
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
