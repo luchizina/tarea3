@@ -22,13 +22,13 @@
   <body style="background-color: #32383e" >
       <div class="container">
              <h3>Numero:</h3>
-     
+       <div class="row">
             <%   List<servicios.DtPropuesta> a = (List<servicios.DtPropuesta>) request.getAttribute("propuestas");
         if(a.size()>0){
                 for (servicios.DtPropuesta propa : a) {
                     String h = propa.getTitulo().replace(" ", "+");
         %>
-         <div class="row">
+       
             <div class="col-4 col-sm-4 col-xs-6 col-lg-3 propuestason">
                 <% if (propa.getImg() != null && !propa.getImg().equals("")) {%>
                 <a href="Propuestas?T=<%=h%>" title="<%= propa.getTitulo()%>"><img class="img-rounded" src="/tarea3/retornarimagen?T=<%= propa.getTitulo() %>" width="150" height="150"></a>
