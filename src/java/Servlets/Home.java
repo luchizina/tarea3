@@ -56,7 +56,7 @@ String servicio3=p.getProperty("serv3");
 
  HttpSession respuesta = request.getSession(true);
         Cookie [] cookies = request.getCookies();
-         String identificador = null; 
+         String identificador = ""; 
         for (Cookie cookieActual : cookies) {
          identificador = cookieActual.getName();
            

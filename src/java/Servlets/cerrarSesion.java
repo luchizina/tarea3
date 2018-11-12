@@ -37,8 +37,10 @@ public class cerrarSesion extends HttpServlet {
    PrintWriter out = response.getWriter();
         HttpSession sesion = request.getSession(true);
         if(sesion.getAttribute("sesionAct")!=null){
+            
          Cookie [] cookies = request.getCookies();
-         String identificador = null; 
+         if(cookies != null){
+         String identificador = ""; 
         for (Cookie cookieActual : cookies) {
          identificador = cookieActual.getName();
             if(identificador.equals("usuario"))
@@ -51,6 +53,7 @@ public class cerrarSesion extends HttpServlet {
         this.getServletContext().getRequestDispatcher("/vistas/IniciarS.jsp").forward(request,response);
                break; 
             }
+        }
            
         }
          sesion.invalidate();

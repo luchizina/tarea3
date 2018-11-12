@@ -3,6 +3,11 @@ package Servlets;
 import config.Utils;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,7 +17,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.util.List;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 @WebServlet(name = "pagar", urlPatterns = {"/pagar"})
 public class pagar extends HttpServlet {
 
@@ -54,11 +64,16 @@ String servicio3=p.getProperty("serv3");
          
             if (request.getParameter("T") == null) {
             servicios.DtUsuario user=inicSesion.getUsuarioLogueado(request);
-                List<servicios.DtColaboracion> x = port.traerPropuestasColaboradas(user.getNick()).getListita();
+                List<servicios.DtColaboracion> x = port.traerPropuestasColaboradasNoPagas2(user.getNick()).getListita();
                 request.setAttribute("col", x);
                 this.getServletContext().getRequestDispatcher("/vistas/pro_pagar.jsp").forward(request, response);
             
     } else{
+                 String t = request.getParameter("T");
+                 String titulo = t.replace("+"," ");
+               
+                 request.setAttribute("pro", titulo);
+                   
              this.getServletContext().getRequestDispatcher("/vistas/pro_pag_prop.jsp").forward(request, response);
             }
     }
@@ -89,8 +104,86 @@ String servicio3=p.getProperty("serv3");
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-      
+         Properties p = Utils.getPropiedades(request);
+String http=p.getProperty("http");
+String ip=p.getProperty("ipServices");
+String puerto =p.getProperty("puertoServ");
+String servicio1=p.getProperty("serv1");
+String servicio2=p.getProperty("serv2");
+String servicio3=p.getProperty("serv3");
+        URL hola = new URL(http+ip+puerto+servicio1);
+        URL hola2 = new URL(http+ip+puerto+servicio2);
+        URL hola3 = new URL(http+ip+puerto+servicio3);
+        servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
+        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
+        servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService(hola3);
+        servicios.PublicadorCategoria port2 = servicioCategoria.getPublicadorCategoriaPort();
+        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService(hola2);
+        servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
+            
+         String t = request.getParameter("usuario");
+        if(t!=null && t.equals("proponente")){
+             String nu = request.getParameter("num");
+             String retor= request.getParameter("tar");
+             String propu = request.getParameter("prop");
+             String retorn;
+             switch (retor) {
+                 case "1":
+                     retorn = "Oca";
+                     break;
+                 case "2":
+                     retorn = "Visa";
+                     break;
+                 default:
+                     retorn = "Master" ;
+                     break;
+             }
+            
+            SimpleDateFormat formatoDeFecha = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+              String a = request.getParameter("fecha");
+                Date fecha = formatoDeFecha.parse(a);
+                GregorianCalendar parametro = new GregorianCalendar();
+                parametro.setTime(fecha);
+                XMLGregorianCalendar parametro_fecha;
+
+                parametro_fecha = DatatypeFactory.newInstance().newXMLGregorianCalendar(parametro);
+
+             String cvc = request.getParameter("cvc");
+             String usu = request.getParameter("usu");
+             boolean ok = port3.pagarTarjeta2(nu, retorn, parametro_fecha, cvc, propu, usu);
+             if(ok){
+                   request.setAttribute("error", "jaja");
+                  this.getServletContext().getRequestDispatcher("/vistas/pro_pagar.jsp").forward(request, response);
+             }
+             else{
+             request.setAttribute("error", "jaja");
+                  this.getServletContext().getRequestDispatcher("/vistas/pro_pagar.jsp").forward(request, response);
+            
+             }
+                     
+                     
+         } catch (ParseException | DatatypeConfigurationException ex) {
+            Logger.getLogger(pagar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       }
+        if(t != null && t.equals("colaborador")){
+        String propu = request.getParameter("prop");
+        String nu = request.getParameter("num");
+        String banco = request.getParameter("banco");
+        String usu = request.getParameter("usu");
+         boolean ok = port3.pagarTrans2(nu,banco,propu,usu);
+       
+        }
+        if(t != null && t.equals("colaborador2")){
+        String propu = request.getParameter("prop");
+        String nu = request.getParameter("num");
+        String banco = request.getParameter("banco");
+        String usu = request.getParameter("usu");
+        boolean ok = port3.pagarPayPal2(nu,banco,propu,usu);
+       
+        }
+        
     }
 
     /**

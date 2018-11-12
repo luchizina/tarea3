@@ -49,23 +49,23 @@ and open the template in the editor.
         <div class="container-fluid">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span class="sr-only">Culturarte</span>
+              <span class="sr-only">CULTURARTE</span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Bienvenido <%out.print(nueva1);%></a>
+              <a class="navbar-brand" href="#" style="text-transform: uppercase">BIENVENIDO <%out.print(nueva1);%></a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="<%= request.getContextPath() %>/Propuestas">Consultar propuesta</a></li>
-              <li><a href="">Registrar colaboración</a></li>
-             <li><a href="<%= request.getContextPath() %>/pagar">Pagar colaboración</a></li>
+                <li><a href="<%= request.getContextPath() %>/Propuestas">CONSULTAR PROPUESTA</a></li>
+              <li><a href="">REGISTRAR COLABORACIÓN</a></li>
+             <li><a href="<%= request.getContextPath() %>/pagar">PAGAR COLABORACIÓN</a></li>
              
      </ul>
             <ul class="nav navbar-nav navbar-right">
                
-             <li><a href="<%= request.getContextPath() %>/cerrarSesion">Cerrar sesión</a></li>
+             <li><a href="<%= request.getContextPath() %>/cerrarSesion">CERRAR SESIÓN</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->

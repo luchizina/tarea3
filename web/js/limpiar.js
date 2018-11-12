@@ -14,16 +14,24 @@ window.addEventListener('pageshow', function(event) {
 
 function showContent() {
     element = document.getElementById("content");
-    check = document.getElementById("proponente");
-    check2 = document.getElementById("colaborador");
+    element2 = document.getElementById("content2");
+    element3 = document.getElementById("content3");
+    check = document.getElementById("con");
+    check2 = document.getElementById("con2");
+    check3 = document.getElementById("con3");
     if (check.checked) {
         element.style.display = 'block';
-        document.getElementById("direccion").required = true;
     } else {
         element.style.display = 'none';
-        document.getElementById("direccion").required = false;
     }
     if (check2.checked) {
-        element.style.display = 'none';
+        element2.style.display = 'block';
+    }else {
+        element2.style.display = 'none';
+    }
+    if (check3.checked) {
+        element3.style.display = 'block';
+    }else {
+        element3.style.display = 'none';
     }
 }
