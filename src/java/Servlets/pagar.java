@@ -152,22 +152,23 @@ String servicio3=p.getProperty("serv3");
               }
                 
 
-            if(nu.equals("") || propu.equals("") || retor.equals("") || cvc.equals("") || a.equals("") || usu.equals("")){
+            if(nu.equals("") || nu == null|| propu.equals("") || propu == null || retor.equals("") || retor == null || cvc.equals("") || cvc == null || a.equals("") || a== null || usu.equals("") || usu == null ){
                request.setAttribute("error", "jaja");
-               this.getServletContext().getRequestDispatcher("/vistas/pro_pagar.jsp").forward(request, response);
+               this.getServletContext().getRequestDispatcher("/vistas/menu_1.jsp").forward(request, response);
                
             }
             else{
              boolean ok = port3.pagarTarjeta2(nu, retor, parametro_fecha, cvc, propu, usu);
              if(ok){
                    request.setAttribute("ok", "jaja");
-                  this.getServletContext().getRequestDispatcher("/vistas/pro_pagar.jsp").forward(request, response);
+                  this.getServletContext().getRequestDispatcher("/vistas/menu_1.jsp").forward(request, response);
              }
              else{
              request.setAttribute("error", "jaja");
-                  this.getServletContext().getRequestDispatcher("/vistas/pro_pag_prop.jsp").forward(request, response);
+                   this.getServletContext().getRequestDispatcher("/vistas/menu_1.jsp").forward(request, response);
             
-             }}
+             }
+            }
                      
                      
          } catch (ParseException | DatatypeConfigurationException ex) {
@@ -176,12 +177,45 @@ String servicio3=p.getProperty("serv3");
        }
         if(t != null && t.equals("colaborador")){
         String banco = request.getParameter("banco");
-         boolean ok = port3.pagarTrans2(nu,banco,propu,usu);
+        if(nu.equals("") || nu == null|| propu.equals("") || propu == null ||  usu.equals("") || usu == null ||  banco.equals("") || banco == null ){
+               request.setAttribute("error", "jaja");
+               this.getServletContext().getRequestDispatcher("/vistas/menu_1.jsp").forward(request, response);
+               
+            }
+            else{
+            boolean ok = port3.pagarTrans2(nu,banco,propu,usu);
+            if(ok){
+                   request.setAttribute("ok", "jaja");
+                  this.getServletContext().getRequestDispatcher("/vistas/menu_1.jsp").forward(request, response);
+             }
+             else{
+             request.setAttribute("error", "jaja");
+                   this.getServletContext().getRequestDispatcher("/vistas/menu_1.jsp").forward(request, response);
+            
+             }
+            }
+        
        
         }
         if(t != null && t.equals("colaborador2")){
-        String banco = request.getParameter("banco");
-        boolean ok = port3.pagarPayPal2(nu,banco,propu,usu);
+        if(nu.equals("") || nu == null|| propu.equals("") || propu == null ||  usu.equals("") || usu == null ){
+               request.setAttribute("error", "jaja");
+               this.getServletContext().getRequestDispatcher("/vistas/menu_1.jsp").forward(request, response);
+               
+            }
+            else{
+             boolean ok = port3.pagarPayPal2(nu,propu,usu);
+            if(ok){
+                   request.setAttribute("ok", "jaja");
+                  this.getServletContext().getRequestDispatcher("/vistas/menu_1.jsp").forward(request, response);
+             }
+             else{
+             request.setAttribute("error", "jaja");
+                   this.getServletContext().getRequestDispatcher("/vistas/menu_1.jsp").forward(request, response);
+            
+             }
+            }
+     
        
         }
         

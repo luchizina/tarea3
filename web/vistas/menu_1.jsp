@@ -67,9 +67,31 @@ and open the template in the editor.
       </nav>
     </div> <!-- /container -->
 </header>
-           <img class="img-thumbnail " src="/img/logo.png" width="200" height="200">
+            <div class="container">
+       <% String a = (String) request.getAttribute("error");
+                    String b = (String) request.getAttribute("ok");
+                                if (a != null) {%>
+                    <div class="alert alert-danger fade in" role="alert">
+                        <a class="alert-link">Esto es incómodo, parece que hubo un problema </a>
+                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+                          <hr>
+                         <p class="mb-0">¿Por qué no vuelves a intentarlo? <a href="<%=request.getContextPath()%>/pagar" class="alert-link">Hazlo.</a></p>
+                    </div>
+                    <% }if (b != null) {%>
+                    <div class="alert alert-success" role="alert">
+                        <a  class="alert-link">Propuesta pagada! </a>
+                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+                          <hr>
+                         <p class="mb-0">¿Qué deseas hacer ahora?<a href="<%=request.getContextPath()%>/pagar" class="alert-link"> Volver al menú principal</a></p>
+                    </div>
+                    </div>
+                    <% } %>
                
-
+ </div>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
