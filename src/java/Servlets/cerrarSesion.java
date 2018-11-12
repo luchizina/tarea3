@@ -50,6 +50,7 @@ public class cerrarSesion extends HttpServlet {
                 //Cerrar sesion
       //  sesion.setAttribute("sesionAct", null);
         sesion.invalidate();
+        request.setAttribute("paso", "si");
         this.getServletContext().getRequestDispatcher("/vistas/IniciarS.jsp").forward(request,response);
                break; 
             }

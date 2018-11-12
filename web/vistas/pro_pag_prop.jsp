@@ -17,6 +17,12 @@
 
         <jsp:include page="/vistas/menu.jsp" />
     </head>
+    <%
+                String control = (String) request.getAttribute("paso");
+                if(control == null){
+                    %>
+                    <jsp:forward page="ErrorIP.jsp"/>
+                    <% }%>
     <body style="background-color: #32383e" >
         <% servicios.DtUsuario userop = inicSesion.getUsuarioLogueado(request); // agregado servicios
             String sesionAct = (String) session.getAttribute("sesionAct");

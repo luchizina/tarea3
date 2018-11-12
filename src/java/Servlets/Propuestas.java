@@ -36,7 +36,7 @@ String puerto =p.getProperty("puertoServ");
 String servicio1=p.getProperty("serv1");
 String servicio2=p.getProperty("serv2");
 String servicio3=p.getProperty("serv3");
-
+try{
         URL hola = new URL(http+ip+puerto+servicio1);
         URL hola2 = new URL(http+ip+puerto+servicio2);
         URL hola3 = new URL(http+ip+puerto+servicio3);
@@ -46,7 +46,7 @@ String servicio3=p.getProperty("serv3");
         servicios.PublicadorCategoria port2 = servicioCategoria.getPublicadorCategoriaPort();
         servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService(hola2);
         servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
-        
+      
         
         response.setContentType("text/html;charset=UTF-8");
             request.setCharacterEncoding("UTF-8");
@@ -55,6 +55,7 @@ String servicio3=p.getProperty("serv3");
             
                 List<servicios.DtPropuesta> x = port3.listarPropuestasWeb().getListita();
                 request.setAttribute("propuestas", x);
+                request.setAttribute("paso", "si");
                 this.getServletContext().getRequestDispatcher("/vistas/pros.jsp").forward(request, response);
             } else {
             // CONSULTA A UNA PROPUESTA 
@@ -67,12 +68,16 @@ String servicio3=p.getProperty("serv3");
                 servicios.DtPropuesta p_consulta = port3.selccionarPropuesta(titulo);
                 List<String> colaborador = port3.colaboradoresDePropuesta().getListita();
                 request.setAttribute("propu", p_consulta);
-                request.setAttribute("col", colaborador);           
+                request.setAttribute("col", colaborador);    
+                request.setAttribute("paso", "si");
                 this.getServletContext().getRequestDispatcher("/vistas/prop_info.jsp").forward(request, response);
           
                 }
                
     }
+             }catch(Exception EX){
+      request.getRequestDispatcher("/vistas/ErrorIP.jsp").forward(request, response);
+  } 
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
