@@ -120,47 +120,46 @@ String servicio3=p.getProperty("serv3");
         servicios.PublicadorCategoria port2 = servicioCategoria.getPublicadorCategoriaPort();
         servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService(hola2);
         servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
-            
+             HttpSession respuesta = request.getSession(true);
          String t = request.getParameter("usuario");
+         String nu = request.getParameter("num");
+          String propu = request.getParameter("prop");
+            String usu = request.getParameter("usu");
         if(t!=null && t.equals("proponente")){
-             String nu = request.getParameter("num");
+             
              String retor= request.getParameter("tar");
-             String propu = request.getParameter("prop");
-             String retorn;
-             switch (retor) {
-                 case "1":
-                     retorn = "Oca";
-                     break;
-                 case "2":
-                     retorn = "Visa";
-                     break;
-                 default:
-                     retorn = "Master" ;
-                     break;
-             }
+              String cvc = request.getParameter("cvc");
+                    
             
             SimpleDateFormat formatoDeFecha = new SimpleDateFormat("yyyy-MM-dd");
             try {
               String a = request.getParameter("fecha");
+               XMLGregorianCalendar parametro_fecha = null;
+              if(!a.equals("")){
                 Date fecha = formatoDeFecha.parse(a);
                 GregorianCalendar parametro = new GregorianCalendar();
                 parametro.setTime(fecha);
-                XMLGregorianCalendar parametro_fecha;
-
+               
                 parametro_fecha = DatatypeFactory.newInstance().newXMLGregorianCalendar(parametro);
+              }
+                
 
-             String cvc = request.getParameter("cvc");
-             String usu = request.getParameter("usu");
-             boolean ok = port3.pagarTarjeta2(nu, retorn, parametro_fecha, cvc, propu, usu);
+            if(nu.equals("") || propu.equals("") || retor.equals("") || cvc.equals("") || a.equals("") || usu.equals("")){
+               request.setAttribute("error", "jaja");
+               this.getServletContext().getRequestDispatcher("/vistas/pro_pagar.jsp").forward(request, response);
+               
+            }
+            else{
+             boolean ok = port3.pagarTarjeta2(nu, retor, parametro_fecha, cvc, propu, usu);
              if(ok){
-                   request.setAttribute("error", "jaja");
+                   request.setAttribute("ok", "jaja");
                   this.getServletContext().getRequestDispatcher("/vistas/pro_pagar.jsp").forward(request, response);
              }
              else{
              request.setAttribute("error", "jaja");
-                  this.getServletContext().getRequestDispatcher("/vistas/pro_pagar.jsp").forward(request, response);
+                  this.getServletContext().getRequestDispatcher("/vistas/pro_pag_prop.jsp").forward(request, response);
             
-             }
+             }}
                      
                      
          } catch (ParseException | DatatypeConfigurationException ex) {
@@ -168,18 +167,12 @@ String servicio3=p.getProperty("serv3");
         }
        }
         if(t != null && t.equals("colaborador")){
-        String propu = request.getParameter("prop");
-        String nu = request.getParameter("num");
         String banco = request.getParameter("banco");
-        String usu = request.getParameter("usu");
          boolean ok = port3.pagarTrans2(nu,banco,propu,usu);
        
         }
         if(t != null && t.equals("colaborador2")){
-        String propu = request.getParameter("prop");
-        String nu = request.getParameter("num");
         String banco = request.getParameter("banco");
-        String usu = request.getParameter("usu");
         boolean ok = port3.pagarPayPal2(nu,banco,propu,usu);
        
         }

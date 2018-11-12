@@ -25,7 +25,9 @@
     DtColaborador cola = (DtColaborador) userop;
       %> 
       <div class="container">
-             <%   
+            
+       <div class="row" >
+            <%   
               List<servicios.DtColaboracion> am = (List<servicios.DtColaboracion>) request.getAttribute("col");
             String ca = "";
            
@@ -34,9 +36,7 @@
                 for (servicios.DtColaboracion propa : am) {
                    ca = propa.getPropuesta().getTitulo().replace(" ", "+");
                 
-        %>
-  
-       <div class="row" >
+        %>    
                 <div class="col-sm-4 col-md-4 col-lg-6 col-xl-6 col-sm-offset-4 col-md-offset-4 col-lg-offset-3 col-xl-offset-3">
 
                     <ul class="list-group">
@@ -47,7 +47,19 @@
                     </ul>
                 </div><!-- /.col-sm-4 -->
             </div>
+                     <% String a = (String) request.getAttribute("error");
+                    String b = (String) request.getAttribute("ok");
+                                if (a != null) {%>
+                    <div class="alert alert-danger" role="alert">
+                        <a href="#" class="alert-link">Esto es incómodo, parece que hubo un problema </a>
+                    </div>
+                    <% }if (b != null) {%>
+                    <div class="alert alert-success" role="alert">
+                        <a href="#" class="alert-link">Propuesta <%= ca%> pagada! </a>
+                    </div>
+                    <% } %>
       </div>
+                    
                     
     <!-- Footer -->
     

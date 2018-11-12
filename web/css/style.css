@@ -33,7 +33,7 @@ left: 50%;
 position: relative;
 margin-bottom: 50px;
 background: transparent;
-border: 3px double #111;
+border: 3px dodgerblue #111;
 text-transform: uppercase;
 }
  .btn-circle:hover{
@@ -57,7 +57,7 @@ legend.scheduler-border {
     color: #fff;
 }
 .text-on-pannel {
-     background-color: rgba(20,20,20,.9);
+    background-color: rgba(20,20,20,.9);
     height: auto;
     margin-left: 10px;
     padding: 3px 5px;
@@ -66,12 +66,18 @@ legend.scheduler-border {
     border: 3px double #111;
     border-radius: 8px;
 }
+
 .img-thumbnail {
-    width: 100%;
+   min-height: 250px;
+min-width: 300px;
+max-height: 300px;
+max-width: 600px !important;
+    
 }
 .panel {
   /* for text on pannel */
-  margin-top: 27px !important;
+  margin-top: 20px !important;
+  
 }
 .panel-body {
   padding: 0px !important;
@@ -109,3 +115,4 @@ legend.scheduler-border {
     0px 0px 5px 1.5px #ddd;
   transform: translate(-50%, -50%) rotate(45deg) ;
 }
+
