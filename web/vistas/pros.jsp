@@ -13,6 +13,12 @@
     <link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet">
 <jsp:include page="/vistas/menu.jsp" />
   </head>
+  <%
+                String control = (String) request.getAttribute("paso");
+                if(control == null){
+                    %>
+                    <jsp:forward page="ErrorIP.jsp"/>
+                    <% }%>
   <body style="background-color: #32383e" >
       <div class="container">
              <h3>Numero:</h3>

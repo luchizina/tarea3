@@ -45,6 +45,7 @@ String http=p.getProperty("http");
 String ip=p.getProperty("ipServices");
 String puerto =p.getProperty("puertoServ");
 String servicio1=p.getProperty("serv1");
+try{
         URL hola = new URL(http+ip+puerto+servicio1);
         servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
@@ -72,26 +73,34 @@ String servicio1=p.getProperty("serv1");
       respuesta.setAttribute("sesionAct", resultado.getNick());
       respuesta.setAttribute("tipo", resultado.getTipoUser());
       respuesta.setAttribute("mensaje", resultado.getMensaje());
-      
+      request.setAttribute("paso", "si");
        this.getServletContext().getRequestDispatcher("/vistas/menu.jsp").forward(request, response);
  }
  
  else if(!resultado.isEstLogin()){
      respuesta.setAttribute("error", resultado.getMensaje());
+     request.setAttribute("paso", "si");
      this.getServletContext().getRequestDispatcher("/vistas/IniciarS.jsp").forward(request, response);
     
  }
  }  else{
             request.setAttribute("error","proponente");
+            request.setAttribute("paso", "si");
            this.getServletContext().getRequestDispatcher("/vistas/IniciarS.jsp").forward(request, response);
       }
     }
       else{
+          request.setAttribute("paso", "si");
            this.getServletContext().getRequestDispatcher("/vistas/IniciarS.jsp").forward(request, response);
       }
       
        }else{
+         request.setAttribute("paso", "si");
         this.getServletContext().getRequestDispatcher("/vistas/menu.jsp").forward(request, response);  
+     }
+     
+     }catch(Exception EX){
+         request.getRequestDispatcher("/vistas/ErrorIP.jsp").forward(request, response);   
      }
       
     }

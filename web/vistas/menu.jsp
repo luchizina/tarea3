@@ -27,6 +27,13 @@ and open the template in the editor.
   </head>
 
   <body style="background-color:  #32383e">
+      
+          <%
+                String control = (String) request.getAttribute("paso");
+                if(control == null){
+                    %>
+                    <jsp:forward page="ErrorIP.jsp"/>
+                    <% }%>
 <header>
     <div class="container">
  <% 

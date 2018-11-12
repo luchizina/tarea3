@@ -43,17 +43,21 @@ String puerto =p.getProperty("puertoServ");
 String servicio1=p.getProperty("serv1");
 String servicio2=p.getProperty("serv2");
 String servicio3=p.getProperty("serv3");
-
-        URL hola = new URL(http+ip+puerto+servicio1);
-        URL hola2 = new URL(http+ip+puerto+servicio2);
-        URL hola3 = new URL(http+ip+puerto+servicio3);
-        servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
-        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
-        servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService(hola3);
-        servicios.PublicadorCategoria port2 = servicioCategoria.getPublicadorCategoriaPort();
-        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService(hola2);
-        servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
-
+//try{
+//    
+//
+//        URL hola = new URL(http+ip+puerto+servicio1);
+//        URL hola2 = new URL(http+ip+puerto+servicio2);
+//        URL hola3 = new URL(http+ip+puerto+servicio3);
+//        servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
+//        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
+//        servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService(hola3);
+//        servicios.PublicadorCategoria port2 = servicioCategoria.getPublicadorCategoriaPort();
+//        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService(hola2);
+//        servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
+//}catch(Exception EX){
+//    request.getRequestDispatcher("/vistas/ErrorIP.jsp").forward(request, response);
+//}
  HttpSession respuesta = request.getSession(true);
         Cookie [] cookies = request.getCookies();
          String identificador = ""; 
@@ -64,6 +68,7 @@ String servicio3=p.getProperty("serv3");
             if(identificador.equals("usuario"))
             {
                 respuesta.setAttribute("sesionAct",cookieActual.getValue() );
+                request.setAttribute("paso", "si");
                 request.getRequestDispatcher("/vistas/menu.jsp").forward(request, response);
                break; 
             }
@@ -71,6 +76,7 @@ String servicio3=p.getProperty("serv3");
         }
          }
      if(respuesta.getAttribute("sesionAct")==null && !(identificador.equals("usuario"))){
+           request.setAttribute("paso", "si");
         request.getRequestDispatcher("/vistas/IniciarS.jsp").forward(request, response);
      }
     }

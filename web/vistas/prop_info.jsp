@@ -11,6 +11,12 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <%
+                String control = (String) request.getAttribute("paso");
+                if(control == null){
+                    %>
+                    <jsp:forward page="ErrorIP.jsp"/>
+                    <% }%>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Propuesta</title>
         <link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet">
