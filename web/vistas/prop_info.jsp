@@ -68,11 +68,19 @@
                 }
         }
         
+        
         %>
                         <li class="list-group-item">Colaboradores: <%=ca %></li>
-                    </ul>
+                   
+                <%   
+                } else {
+%>
+     <li class="list-group-item">Colaboradores: aún no tiene colaboradores...</li>
+                        <%}%>
+         %>
+          </ul>
                 </div><!-- /.col-sm-4 -->
             </div>
-        
+       
     </body>
 </html>
