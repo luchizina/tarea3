@@ -37,10 +37,10 @@
                        <%    }%>
                 <h4><%= propa.getTitulo()%></h4>
             </div>
-            </div><!--/span-->  
+           <!--/span-->  
              <% }
                 } %>
-            
+            </div> 
       </div>
     <!-- Footer -->
     
