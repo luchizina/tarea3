@@ -12,11 +12,11 @@
 <html>
     <head>
         <%
-                String control = (String) request.getAttribute("paso");
-                if(control == null){
-                    %>
-                    <jsp:forward page="ErrorIP.jsp"/>
-                    <% }%>
+            String control = (String) request.getAttribute("paso");
+            if (control == null) {
+        %>
+        <jsp:forward page="ErrorIP.jsp"/>
+        <% }%>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Propuesta</title>
         <link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet">
@@ -28,24 +28,36 @@
     <body style="background-color: #32383e">  
 
         <% servicios.DtPropuesta prop = (servicios.DtPropuesta) request.getAttribute("propu");%>
-       <div class="container">
-        <div class="row">
-      <div class="col-sm-4 col-md-4  col-sm-offset-5 col-md-offset-4 col-xs-offset-1">
-      <h4 class="text-on-pannel text-primary"><strong class="text-uppercase"> <%= prop.getTitulo()%> </strong></h4>
-      
-                <% if (prop.getImg() != null && !prop.getImg().equals("")) {  %>
-                <img class="img-thumbnail " src="/tarea3/retornarimagen?T=<%= prop.getTitulo()%>" width="200" height="200">
-                <%   } else {%>     
-                <img class="img-rounded"  src="/tarea3/img/pro.jpeg"  width="200" height="200" >
-                <%    }%>
-
-            </div><!--/span-->  
-        </div>
+        <div class="container">
             <div class="row">
-            <div class="col-sm-4 col-md-3 col-lg-5 col-xl-6 col-sm-offset-4 col-md-offset-4 col-lg-offset-3 col-xl-offset-3" style="padding-top:10px; height:50px">
-                <button type="button" class=" btn-circle">colaborar</button>
-            </div>  
+                <div class="col-sm-4 col-md-4  col-sm-offset-5 col-md-offset-4 col-xs-offset-1">
+                    <h4 class="text-on-pannel text-primary"><strong class="text-uppercase"> <%= prop.getTitulo()%> </strong></h4>
+
+                    <% if (prop.getImg() != null && !prop.getImg().equals("")) {%>
+                    <img class="img-thumbnail " src="/tarea3/retornarimagen?T=<%= prop.getTitulo()%>" width="200" height="200">
+                    <%   } else {%>     
+                    <img class="img-rounded"  src="/tarea3/img/pro.jpeg"  width="200" height="200" >
+                    <%    }%>
+
+                </div><!--/span-->  
             </div>
+            <%if (request.getAttribute("colaboro") != null) {%>
+            <div class="row" >
+                <div class="col-sm-4 col-md-4 col-lg-6 col-xl-6 col-sm-offset-4 col-md-offset-4 col-lg-offset-3 col-xl-offset-3">
+                    <label style="color: white">Usted ya ha colaborado con esta propuesta</label>
+                </div>  
+            </div>
+
+            <%} else {%>
+            <div class="row" >
+                <div class="col-sm-4 col-md-4 col-lg-6 col-xl-6 col-sm-offset-4 col-md-offset-4 col-lg-offset-3 col-xl-offset-3">
+                    <form action="/tarea3/colaborar" method="post">
+                        <input type="hidden" name="T" value="<%= prop.getTitulo()%>"/>
+                        <button type="submit" class=" btn-circle">colaborar</button>
+                    </form>
+                </div>  
+            </div>
+            <%}%>
             <div class="row">
 
                 <div class="col-sm-4 col-md-4 col-lg-6 col-xl-6 col-sm-offset-4 col-md-offset-4 col-lg-offset-3 col-xl-offset-3"  style="max-width: 600px !important" >
@@ -60,35 +72,35 @@
                                 String propu = prop.getEstActual().getEstado().toString();
                                 String propu2 = propu.replace("_", " ");%>
                         <li class="list-group-item">Estado actual: <%=  propu2%></li>
-                          <%   
-              List<String> am = (List<String>) request.getAttribute("col");
-            String ca = "";
-           
-        if(am != null && am.size()>0){
-            int we = 0;
-                for (String propa : am) {
-                   if(we!=0) ca+=", "; 
-                   ca += propa;
-                   we+=1;
-                   
-                }
-        
-        
-        
-        
-        %>
-                        <li class="list-group-item">Colaboradores: <%=ca %></li>
-                   
-                <%   
-                 }else {
-%>
-     <li class="list-group-item">Colaboradores: aún no tiene colaboradores...</li>
-                        <%}%>
-         
-          </ul>
+                            <%
+                                List<String> am = (List<String>) request.getAttribute("col");
+                                String ca = "";
+
+                                if (am != null && am.size() > 0) {
+                                    int we = 0;
+                                    for (String propa : am) {
+                                        if (we != 0) {
+                                            ca += ", ";
+                                        }
+                                        ca += propa;
+                                        we += 1;
+
+                                    }
+
+
+                            %>
+                        <li class="list-group-item">Colaboradores: <%=ca%></li>
+
+                        <%
+                        } else {
+                        %>
+                        <li class="list-group-item">Colaboradores: aún no tiene colaboradores...</li>
+                            <%}%>
+
+                    </ul>
                 </div><!-- /.col-sm-4 -->
             </div>
-                         </div>
-       
+        </div>
+
     </body>
 </html>

@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.util.List;
 import java.util.Properties;
+import javax.servlet.http.HttpSession;
+import servicios.DtPropuesta;
 @WebServlet(name = "Propuestas", urlPatterns = {"/Propuestas"})
 public class Propuestas extends HttpServlet {
 
@@ -50,6 +52,7 @@ try{
         
         response.setContentType("text/html;charset=UTF-8");
             request.setCharacterEncoding("UTF-8");
+            HttpSession respuesta = request.getSession(true);
             // LISTAR PROPUESTAS 
             if (request.getParameter("T") == null) {
             
@@ -67,6 +70,11 @@ try{
                 //DtPropuesta p_consulta = IP.SeleccionarProp(titulo);
                 servicios.DtPropuesta p_consulta = port3.selccionarPropuesta(titulo);
                 List<String> colaborador = port3.colaboradoresDePropuesta().getListita();
+                    String nick = (String) respuesta.getAttribute("sesionAct");
+                    List<servicios.DtPropuesta.Colaboradores.Entry> lista = p_consulta.getColaboradores().getEntry();
+                    lista.stream().filter((lala) -> (lala.getKey().equals(nick))).forEachOrdered((DtPropuesta.Colaboradores.Entry _item) -> {
+                        request.setAttribute("colaboro", "true");
+                    });
                 request.setAttribute("propu", p_consulta);
                 request.setAttribute("col", colaborador);    
                 request.setAttribute("paso", "si");
