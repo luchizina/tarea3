@@ -35,7 +35,7 @@
                 DtColaborador cola = (DtColaborador) userop;
         %> 
         <div class="container">
-
+            <h3 class="h33">SELECCIONE PROPUESTA A COLABORAR:</h3>
             <div class="row" >
                 <%
                     List<servicios.DtPropuesta> am = (List<servicios.DtPropuesta>) request.getAttribute("propus");
@@ -51,7 +51,7 @@
 
                     <ul class="list-group">
                         <li class="list-group-item">Titulo: <a href="Propuestas?T=<%= ca%>" ><%= propa.getTitulo()%> </a></li>
-                        <li class="list-group-item">Proponente: <%= propa.getPropoACargo() %> </li>
+                        <li class="list-group-item">Proponente: <%= propa.getPropoACargo()%> </li>
                     </ul>
                 </div><!-- /.col-sm-4 -->
             </div>
