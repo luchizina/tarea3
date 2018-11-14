@@ -44,7 +44,7 @@
                             <label class="control-label " for="colaborador">Entrada</label>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="monto" name="monto" placeholder="Monto" required="required"/>
+                            <input type="text" class="form-control" pattern="[0-9]*" id="monto" name="monto" placeholder="Monto" required="required"/>
                         </div>
                         <input type="hidden" name="Titulo" value="<%=request.getParameter("T")%>">
                         <div class="form-group">
@@ -71,7 +71,7 @@
                             <label class="control-label " for="colaborador">Entrada</label>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="monto" name="monto" placeholder="Monto" required="required"/>
+                            <input type="text" class="form-control" pattern="[0-9]*" id="monto" name="monto" placeholder="Monto" required="required"/>
                         </div>
                         <input type="hidden" name="Titulo" value="<%=request.getParameter("T")%>">
                         <div class="form-group">
@@ -97,7 +97,7 @@
                             <label class="control-label " for="colaborador">Entrada</label>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="monto" name="monto" placeholder="Monto" required="required"/>
+                            <input type="text" class="form-control" pattern="[0-9]*" id="monto" name="monto" placeholder="Monto" required="required"/>
                         </div>
                         <input type="hidden" name="Titulo" value="<%=request.getParameter("T")%>">
                         <div class="form-group">
