@@ -80,6 +80,8 @@ try{
                 request.setAttribute("paso", "si");
                 this.getServletContext().getRequestDispatcher("/vistas/prop_info.jsp").forward(request, response);
           
+                } else {
+                     this.getServletContext().getRequestDispatcher("/WEB-INF/404.jsp").forward(request, response);
                 }
                
     }
