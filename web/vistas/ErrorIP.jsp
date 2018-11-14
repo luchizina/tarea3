@@ -22,7 +22,7 @@
     <span aria-hidden="true">&times;</span>
   </button>
                           <hr>
-                         <p class="mb-0">Hubo un problema accediendo al servidor central.<a href="<%=request.getContextPath()%>/home" class="alert-link"> Volver al menú principal</a></p>
+                         <p class="mb-0">Hubo un problema accediendo al servidor central.<a href="<%=request.getContextPath()%>/cerrarSesion" class="alert-link"> Volver al menú principal</a></p>
                        
          </div>
                          <img class="img-rounded col-sm-3 col-md-4 col-xs-8 col-sm-offset-5 col-md-offset-4 col-xs-offset-1"  src="/tarea3/img/error500.png"  style="max-width: 200; max-height: 200" ></a>

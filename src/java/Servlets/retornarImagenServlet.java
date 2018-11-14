@@ -43,6 +43,7 @@ public class retornarImagenServlet extends HttpServlet {
             throws ServletException, IOException{
             String T = request.getParameter("T");
             response.setContentType("image/jpeg");
+            request.setCharacterEncoding("UTF-8");
             Properties p = Utils.getPropiedades(request);
 String http=p.getProperty("http");
 String ip=p.getProperty("ipServices");

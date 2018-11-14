@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import static java.lang.System.out;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.Properties;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
@@ -39,6 +40,7 @@ public class inicSesion extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
  PrintWriter out = response.getWriter();
  Properties p = Utils.getPropiedades(request);
 String http=p.getProperty("http");
@@ -65,7 +67,7 @@ try{
  if(resultado.isEstLogin()){
      String checkcita= request.getParameter("rec");
        if(request.getParameter("rec")!=null){
-            Cookie miCookie = new Cookie("usuario",nick);
+            Cookie miCookie = new Cookie("usuario", URLEncoder.encode(nick, "UTF-8"));
     // hacemos que nuestra cookie tenga sentido durante un día
     miCookie.setMaxAge(60*60*24);
     response.addCookie(miCookie);

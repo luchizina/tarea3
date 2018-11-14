@@ -8,6 +8,7 @@ import config.Utils;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.util.Properties;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,7 +36,7 @@ public class Home extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-  
+  request.setCharacterEncoding("UTF-8");
 Properties p = Utils.getPropiedades(request);
 String http=p.getProperty("http");
 String ip=p.getProperty("ipServices");
@@ -67,7 +68,7 @@ String servicio3=p.getProperty("serv3");
            
             if(identificador.equals("usuario"))
             {
-                respuesta.setAttribute("sesionAct",cookieActual.getValue() );
+                respuesta.setAttribute("sesionAct",URLDecoder.decode(cookieActual.getValue(), "UTF-8") );
                 request.setAttribute("paso", "si");
                 request.getRequestDispatcher("/vistas/menu.jsp").forward(request, response);
                break; 
@@ -75,9 +76,16 @@ String servicio3=p.getProperty("serv3");
            
         }
          }
+ 
      if(respuesta.getAttribute("sesionAct")==null && !(identificador.equals("usuario"))){
            request.setAttribute("paso", "si");
         request.getRequestDispatcher("/vistas/IniciarS.jsp").forward(request, response);
+     }
+     
+     else if(respuesta.getAttribute("sesionAct") != null && !(identificador.equals("usuario")))
+     {
+         request.setAttribute("paso", "si");
+                request.getRequestDispatcher("/vistas/menu.jsp").forward(request, response);
      }
     }
 
