@@ -34,7 +34,12 @@
                 <div class=" form-group col-sm-4 col-md-4 col-lg-6 col-xl-6 col-sm-offset-4 col-md-offset-4 col-lg-offset-3 col-xl-offset-3" style="color: #fff">
                     <div class=" form-group ">
                         <label for="input">Elija tipo de pago:</label>
+                         <div class="form-check">
+                            <input type="radio" name="usuario" value="colaborador2" id="con3" onchange="javascript:showContent()" checked >
+                            <label class="control-label " for="colaborador">Paypal</label>
+                        </div>
                         <div class="form-check">
+                            
                             <input type="radio" name="usuario" value="proponente" id="con" onchange="javascript:showContent()" >
                             <label class="control-label " for="content">Tarjeta</label>
                         </div>
@@ -42,10 +47,7 @@
                             <input type="radio" name="usuario" value="colaborador" id="con2" onchange="javascript:showContent()" >
                             <label class="control-label " for="colaborador">Transferencia</label>
                         </div>
-                        <div class="form-check">
-                            <input type="radio" name="usuario" value="colaborador2" id="con3" onchange="javascript:showContent()" >
-                            <label class="control-label " for="colaborador">Paypal</label>
-                        </div>
+                       
                     </div>
                     <div class="form-row " >
                         <div class="form-group col-md-4">
@@ -59,7 +61,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputAddress">Numero:</label>
-                        <input type="number" class="form-control" id="inputAddress" placeholder="ej: 1234567" name="num" >
+                        <input type="number" class="form-control" id="inputAddress" placeholder="ej: 1234567" name="num" required="required">
                     </div>
                 </div>
                 <div id="content" style="display: none;">
@@ -67,7 +69,7 @@
                         <div class="col-sm-4 col-md-4 col-lg-6 col-xl-6 col-sm-offset-4 col-md-offset-4 col-lg-offset-3 col-xl-offset-3">
                             <label for="inputState">Tipo tarjeta:</label>
                             <select id="inputState" class="form-control" name="tar">
-                                <option selected>OCA</option>
+                                <option selected >OCA</option>
                                 <option>VISA</option>
                                 <option>MASTER</option>
                             </select>

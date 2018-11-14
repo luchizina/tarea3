@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import servicios.DataListColaboraciones;
 import servicios.DtPropuesta;
 
@@ -57,6 +58,8 @@ public class colaborar extends HttpServlet {
             servicios.PublicadorCategoria port2 = servicioCategoria.getPublicadorCategoriaPort();
             servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService(hola2);
             servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
+             HttpSession respuesta = request.getSession(true);
+             if(respuesta.getAttribute("sesionAct") != null){
             String monto = request.getParameter("monto");
             if(request.getParameter("monto") == null && request.getParameter("T") == null){
                 List<DtPropuesta> propuaColaborar = port3.listarPropuestasWeb().getListita();
@@ -78,8 +81,12 @@ public class colaborar extends HttpServlet {
                 String nick = (String) request.getSession().getAttribute("sesionAct");
                 port3.altaColaboracion(titulo, nick, monto, tipoR);
                 request.setAttribute("paso", "si");
-                this.getServletContext().getRequestDispatcher("/vistas/menu.jsp").forward(request, response);
+                 request.setAttribute("cola", "b");
+                this.getServletContext().getRequestDispatcher("/vistas/menu_1.jsp").forward(request, response);
             }
+             }else{
+          request.getRequestDispatcher("/WEB-INF/404.jsp").forward(request, response);
+         }
         } catch (Exception EX) {
             request.getRequestDispatcher("/vistas/ErrorIP.jsp").forward(request, response);
         }

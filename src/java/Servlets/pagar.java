@@ -50,7 +50,6 @@ String servicio2=p.getProperty("serv2");
 String servicio3=p.getProperty("serv3");
 try{
     
-
         URL hola = new URL(http+ip+puerto+servicio1);
         URL hola2 = new URL(http+ip+puerto+servicio2);
         URL hola3 = new URL(http+ip+puerto+servicio3);
@@ -63,7 +62,7 @@ try{
             
             // LISTAR PROPUESTAS 
             HttpSession respuesta = request.getSession(true);
-         
+         if(respuesta.getAttribute("sesionAct") != null){
             if (request.getParameter("T") == null) {
             servicios.DtUsuario user=inicSesion.getUsuarioLogueado(request);
                 List<servicios.DtColaboracion> x = port.traerPropuestasColaboradasNoPagas2(user.getNick()).getListita();
@@ -79,6 +78,10 @@ try{
                    request.setAttribute("paso", "si");
              this.getServletContext().getRequestDispatcher("/vistas/pro_pag_prop.jsp").forward(request, response);
             }
+         }else{
+          request.getRequestDispatcher("/WEB-INF/404.jsp").forward(request, response);
+         }
+         
             }catch(Exception EX){
                  request.getRequestDispatcher("/vistas/ErrorIP.jsp").forward(request, response);
             }

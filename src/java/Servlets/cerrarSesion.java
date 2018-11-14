@@ -60,8 +60,10 @@ public class cerrarSesion extends HttpServlet {
          sesion.invalidate();
         this.getServletContext().getRequestDispatcher("/home").forward(request,response);
         //Redirecciono a index.jsp
-        
-    }
+                  
+ }else{
+          request.getRequestDispatcher("/WEB-INF/404.jsp").forward(request, response);
+         }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

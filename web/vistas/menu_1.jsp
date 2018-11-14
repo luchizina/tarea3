@@ -70,6 +70,7 @@ and open the template in the editor.
             <div class="container">
        <% String a = (String) request.getAttribute("error");
                     String b = (String) request.getAttribute("ok");
+                    String c = (String) request.getAttribute("cola");
                                 if (a != null) {%>
                     <div class="alert alert-danger fade in" role="alert">
                         <a class="alert-link">Esto es incómodo, parece que hubo un problema </a>
@@ -86,11 +87,21 @@ and open the template in the editor.
     <span aria-hidden="true">&times;</span>
   </button>
                           <hr>
-                         <p class="mb-0">¿Qué deseas hacer ahora?<a href="<%=request.getContextPath()%>/pagar" class="alert-link"> Volver al menú principal</a></p>
+                         <p class="mb-0">¿Qué deseas hacer ahora?<a href="<%=request.getContextPath()%>/home" class="alert-link"> Volver al menú principal</a></p>
                     </div>
+                    
+                    <% } if ( c != null  ){ %>
+                    <div class="alert alert-success" role="alert">
+                        <a  class="alert-link"> ¡Se ha registrado su colaboración! </a>
+                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+                          <hr>
+                         <p class="mb-0">¿Qué deseas hacer ahora?<a href="<%=request.getContextPath()%>/home" class="alert-link"> Volver al menú principal</a></p>
                     </div>
-                    <% } %>
-               
+                   
+                    <% }  %>
+               </div>
  </div>
     <!-- Bootstrap core JavaScript
     ================================================== -->

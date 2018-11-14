@@ -31,7 +31,7 @@
     DtColaborador cola = (DtColaborador) userop;
       %> 
       <div class="container">
-            
+               <h3 class="h33">SELECCIONE PROPUESTA A PAGAR:</h3>
        <div class="row" >
             <%   
               List<servicios.DtColaboracion> am = (List<servicios.DtColaboracion>) request.getAttribute("col");
@@ -71,9 +71,17 @@
     
     <%
  }
-}
- }
- %>
+}else {%>
+   <div class="col-sm-4 col-md-4 col-lg-6 col-xl-6 col-sm-offset-4 col-md-offset-4 col-lg-offset-3 col-xl-offset-3">
+
+                    <ul class="list-group">
+                        <li class="list-group-item">Usted no tiene colaboraciones a pagar</li>
+                    </ul>
+                </div><!-- /.col-sm-4 -->
+            </div>
+
+ <%}
+}%>
     <!-- Bootstrap core JavaScript -->
     <script src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
         <script  src="<%= request.getContextPath()%>/js/limpiar.js"></script>

@@ -21,7 +21,7 @@
                     <% }%>
   <body style="background-color: #32383e" >
       <div class="container">
-             <h3>Numero:</h3>
+             <h2 class="h33">Selecciona una propuesta:</h2>
        <div class="row">
             <%   List<servicios.DtPropuesta> a = (List<servicios.DtPropuesta>) request.getAttribute("propuestas");
         if(a.size()>0){

@@ -64,7 +64,7 @@ and open the template in the editor.
               <li><a href="<%= request.getContextPath() %>/colaborar">REGISTRAR COLABORACIÓN</a></li>
              <li><a href="<%= request.getContextPath() %>/pagar">PAGAR COLABORACIÓN</a></li>
              
-     </ul>
+             </ul>
             <ul class="nav navbar-nav navbar-right">
                
              <li><a href="<%= request.getContextPath() %>/cerrarSesion">CERRAR SESIÓN</a></li>

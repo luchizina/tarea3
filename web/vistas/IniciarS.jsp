@@ -18,7 +18,7 @@
 <link href="<%=request.getContextPath()%>/css/login.css" rel="stylesheet">
 
 </head>
-<body >
+<body style="background-color:  #32383e">
         <%
                 String control = (String) request.getAttribute("paso");
                 if(control == null){
@@ -31,7 +31,7 @@
  if(sesionAct!=null) { %>
 
  <%  }else{ %>
-    <div class="login-form" >
+    <div class="login-form" style="background-color:  #32383e" >
     <form action="iniciarS" method="post">
         <div>
         <h2 class="text-center">Iniciar Sesión</h2>       
