@@ -30,7 +30,7 @@
         <% servicios.DtPropuesta prop = (servicios.DtPropuesta) request.getAttribute("propu");%>
         <div class="container">
             <div class="row">
-                <div class="col-sm-4 col-md-4  col-sm-offset-5 col-md-offset-4 col-xs-offset-1">
+                <div class="col-sm-4 col-md-4  col-sm-offset-5 col-md-offset-4 col-xs-offset-0">
                     <h4 class="text-on-pannel text-primary"><strong class="text-uppercase"> <%= prop.getTitulo()%> </strong></h4>
 
                     <% if (prop.getImg() != null && !prop.getImg().equals("")) {%>

@@ -52,7 +52,7 @@ public class cerrarSesion extends HttpServlet {
       //  sesion.setAttribute("sesionAct", null);
         sesion.invalidate();
         request.setAttribute("paso", "si");
-        this.getServletContext().getRequestDispatcher("/vistas/IniciarS.jsp").forward(request,response);
+        this.getServletContext().getRequestDispatcher("/home").forward(request,response);
                break; 
             }
         }
@@ -63,7 +63,7 @@ public class cerrarSesion extends HttpServlet {
         //Redirecciono a index.jsp
                   
  }else{
-          request.getRequestDispatcher("/WEB-INF/404.jsp").forward(request, response);
+          request.getRequestDispatcher("/home").forward(request, response);
          }
     }
 

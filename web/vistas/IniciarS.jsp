@@ -26,7 +26,7 @@
                     <jsp:forward page="ErrorIP.jsp"/>
                     <% }%>
      <%
- servicios.DtUsuario userop=inicSesion.getUsuarioLogueado(request);
+ 
  String sesionAct=(String) session.getAttribute("sesionAct");
  if(sesionAct!=null) { %>
 

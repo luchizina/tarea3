@@ -79,7 +79,7 @@ String servicio3=p.getProperty("serv3");
  
      if(respuesta.getAttribute("sesionAct")==null && !(identificador.equals("usuario"))){
            request.setAttribute("paso", "si");
-        request.getRequestDispatcher("/vistas/IniciarS.jsp").forward(request, response);
+        request.getRequestDispatcher("/iniciarS").forward(request, response);
      }
      
      else if(respuesta.getAttribute("sesionAct") != null && !(identificador.equals("usuario")))
